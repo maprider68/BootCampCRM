@@ -1,6 +1,7 @@
 package com.maprider68.bootcamp.CRM.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,47 +9,53 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.maprider68.bootcamp.CRM.dao.CustomerDAO;
+import com.maprider68.bootcamp.CRM.dao.CustomerRepository;
 import com.maprider68.bootcamp.CRM.entity.Customer;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-	private CustomerDAO customerDAO;
+	private CustomerRepository customerRepository;
 	
 	// Inject Customer DAO
 	// Note: Qualifier is to indicate to use the JPA implementation bean
 	@Autowired
-	public CustomerServiceImpl(@Qualifier("customerDAOJpaImpl") CustomerDAO lCustomerDAO)
+	public CustomerServiceImpl(CustomerRepository pCustomerRepository)
 	{
-		customerDAO = lCustomerDAO;
+		customerRepository = pCustomerRepository;
 	}	
 
 	@Override
-	@Transactional
 	public List<Customer> findAll() 
 	{
-		return customerDAO.findAll();
+		return customerRepository.findAll();
 	}
 
 	@Override
-	@Transactional
 	public Customer findById(int pId) 
 	{
-		return customerDAO.findById(pId);
+		Optional<Customer> lFindById = customerRepository.findById(pId);
+		
+		Customer lCustomer = null;
+		if (lFindById.isPresent())
+		{
+			lCustomer = lFindById.get();
+		} else {
+			throw new RuntimeException("Could not find customer by id - " + pId);
+		}
+		return lCustomer;
 	}
 
 	@Override
-	@Transactional
 	public void save(Customer pCustomer) 
 	{
-		customerDAO.save(pCustomer);
+		customerRepository.save(pCustomer);
 	}
 
 	@Override
-	@Transactional
 	public void deleteById(int pId) 
 	{
-		customerDAO.deleteById(pId);
+		customerRepository.deleteById(pId);
 	}
 
 }

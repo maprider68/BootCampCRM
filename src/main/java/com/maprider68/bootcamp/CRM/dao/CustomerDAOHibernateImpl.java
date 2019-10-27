@@ -15,14 +15,17 @@ import com.maprider68.bootcamp.CRM.entity.Customer;
 
 
 
-// ---------------------------------------------------------------------
-// Note: We keep that class as another DAO implementation via Hibernate. 
-//	     But, we use the DAO implementation via JPA to be more generic 
-//---------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------
+// Deprecated: 
+// 	 We keep that as example of DAO implementation. 
+//	 But, we end up using the JpaRepository which does not require us to provide an implementation
+//   Thank you to Spring!
+//----------------------------------------------------------------------------------------------
 
 
 
 
+@Deprecated
 @Repository
 public class CustomerDAOHibernateImpl implements CustomerDAO {
 

@@ -4,6 +4,18 @@ import java.util.List;
 
 import com.maprider68.bootcamp.CRM.entity.Customer;
 
+
+
+//----------------------------------------------------------------------------------------------
+//Deprecated: 
+//	 We keep that as example of DAO implementation. 
+//	 But, we end up using the JpaRepository which does not require us to provide an implementation
+//   Thank you to Spring!
+//----------------------------------------------------------------------------------------------
+
+
+
+@Deprecated
 public interface CustomerDAO 
 {
 
