@@ -1,12 +1,12 @@
-package com.maprider68.bootcamp.CRM.dao;
+package com.maprider68.bootcamp.CRM.service;
 
 import java.util.List;
 
 import com.maprider68.bootcamp.CRM.entity.Customer;
 
-public interface CustomerDAO 
+public interface CustomerService 
 {
-
+	
 	public List<Customer> findAll();
 
 	public Customer findById(int pId);
@@ -14,5 +14,5 @@ public interface CustomerDAO
 	public void save(Customer pCustomer);
 	
 	public void deleteById(int pId);
-	
+
 }
