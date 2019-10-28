@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.maprider68.bootcamp.CRM.entity.Customer;
 
+// Customer service interface
 public interface CustomerService 
 {
 	

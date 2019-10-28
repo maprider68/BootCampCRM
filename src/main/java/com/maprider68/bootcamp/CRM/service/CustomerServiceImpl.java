@@ -12,25 +12,27 @@ import com.maprider68.bootcamp.CRM.dao.CustomerDAO;
 import com.maprider68.bootcamp.CRM.dao.CustomerRepository;
 import com.maprider68.bootcamp.CRM.entity.Customer;
 
+// Customer service implementation
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
 	private CustomerRepository customerRepository;
 	
 	// Inject Customer DAO
-	// Note: Qualifier is to indicate to use the JPA implementation bean
 	@Autowired
 	public CustomerServiceImpl(CustomerRepository pCustomerRepository)
 	{
 		customerRepository = pCustomerRepository;
 	}	
 
+	// Get list of all Customer
 	@Override
 	public List<Customer> findAll() 
 	{
 		return customerRepository.findAll();
 	}
 
+	// Find a Customer for a given id
 	@Override
 	public Customer findById(int pId) 
 	{
@@ -39,19 +41,31 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer lCustomer = null;
 		if (lFindById.isPresent())
 		{
+			// Customer found, get data
 			lCustomer = lFindById.get();
 		} else {
+			// Customer not found for the given id, throw error
 			throw new RuntimeException("Could not find customer by id - " + pId);
 		}
 		return lCustomer;
 	}
 
+	// Save a Customer
 	@Override
 	public void save(Customer pCustomer) 
 	{
+		// Validate that Mandatory field are present. If not, throw exception
+		if (pCustomer.getFirstName() == null || pCustomer.getFirstName().isEmpty() ||
+			pCustomer.getLastName() == null || pCustomer.getLastName().isEmpty()||
+			pCustomer.getEmail() == null || pCustomer.getEmail().isEmpty())
+		{
+			throw new RuntimeException("Customer mandatory fields[firstName,lastName,email] not provided.");
+		}
+
 		customerRepository.save(pCustomer);
 	}
 
+	// Delete a Customer for a given id
 	@Override
 	public void deleteById(int pId) 
 	{
