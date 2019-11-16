@@ -55,11 +55,12 @@ public class CustomerServiceImpl implements CustomerService {
 	public void save(Customer pCustomer) 
 	{
 		// Validate that Mandatory field are present. If not, throw exception
-		if (pCustomer.getFirstName() == null || pCustomer.getFirstName().isEmpty() ||
+		if (pCustomer.getCustomerNumber() == null || pCustomer.getCustomerNumber().isEmpty() ||
+			pCustomer.getFirstName() == null || pCustomer.getFirstName().isEmpty() ||
 			pCustomer.getLastName() == null || pCustomer.getLastName().isEmpty()||
 			pCustomer.getTelephone() == null || pCustomer.getTelephone().isEmpty())
 		{
-			throw new RuntimeException("Customer mandatory fields[firstName,lastName,email] not provided.");
+			throw new RuntimeException("Customer mandatory fields[customerNumber,firstName,lastName,telephone] not provided.");
 		}
 
 		customerRepository.save(pCustomer);

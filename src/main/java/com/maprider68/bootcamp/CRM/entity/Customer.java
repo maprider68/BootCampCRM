@@ -18,6 +18,10 @@ public class Customer
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
+	
+	@Column(name="customerNumber")
+	private String customerNumber;
+
 	@Column(name="first_name")
 	private String firstName;
 	
@@ -55,6 +59,16 @@ public class Customer
 	public void setId(int id) 
 	{
 		this.id = id;
+	}
+
+	public String getCustomerNumber() 
+	{
+		return customerNumber;
+	}
+
+	public void setCustomerNumber(String customerNumber) 
+	{
+		this.customerNumber = customerNumber;
 	}
 
 	public String getFirstName() 
